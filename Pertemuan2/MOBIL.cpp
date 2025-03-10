@@ -1,6 +1,75 @@
 #include <gl/glut.h>
 #include <math.h>
 
+void gedung(){
+//base gedung nya banh
+	glBegin(GL_QUADS);
+	glColor3f(0.1f, 0.1f, 0.1f);  
+    glVertex2f(-0.8f, 0.7f); // Kiri atas
+    glVertex2f(-0.55f, 0.7f);  // Kanan atas
+    glVertex2f(-0.55f, 0.0f);  // Kanan bawah
+    glVertex2f(-0.8f, 0.0f); // Kiri bawah
+
+//jendela di 1,1
+	glBegin(GL_QUADS);
+	glColor3f(1.0f, 1.0f, 0.0f);  
+    glVertex2f(-0.75f, 0.55f); // Kiri atas
+    glVertex2f(-0.70f, 0.55f);  // Kanan atas
+    glVertex2f(-0.70f, 0.50f);  // Kanan bawah
+    glVertex2f(-0.75f, 0.50f); // Kiri bawah
+//1,2
+	glBegin(GL_QUADS);
+	glColor3f(1.0f, 1.0f, 0.0f);  
+    glVertex2f(-0.65f, 0.55f); // Kiri atas
+    glVertex2f(-0.60f, 0.55f);  // Kanan atas
+    glVertex2f(-0.60f, 0.50f);  // Kanan bawah
+    glVertex2f(-0.65f, 0.50f); // Kiri bawah
+//jendela bawahnya 2,2
+	glBegin(GL_QUADS);
+	glColor3f(1.0f, 1.0f, 0.0f);  
+    glVertex2f(-0.65f, 0.45f); // Kiri atas
+    glVertex2f(-0.60f, 0.45f);  // Kanan atas
+    glVertex2f(-0.60f, 0.40f);  // Kanan bawah
+    glVertex2f(-0.65f, 0.40f); // Kiri bawah	
+// sebelahnya yang bawahnya 2,1
+	glBegin(GL_QUADS);
+	glColor3f(1.0f, 1.0f, 0.0f);  
+    glVertex2f(-0.75f, 0.45f); // Kiri atas
+    glVertex2f(-0.70f, 0.45f);  // Kanan atas
+    glVertex2f(-0.70f, 0.40f);  // Kanan bawah
+    glVertex2f(-0.75f, 0.40f); // Kiri bawah
+//bawahnya 3,1
+	glBegin(GL_QUADS);
+	glColor3f(1.0f, 1.0f, 0.0f);  
+    glVertex2f(-0.65f, 0.35f); // Kiri atas
+    glVertex2f(-0.60f, 0.35f);  // Kanan atas
+    glVertex2f(-0.60f, 0.30f);  // Kanan bawah
+    glVertex2f(-0.65f, 0.30f); // Kiri bawah
+//kanannya 3,2
+	glBegin(GL_QUADS);
+	glColor3f(1.0f, 1.0f, 0.0f);  
+    glVertex2f(-0.75f, 0.35f); // Kiri atas
+    glVertex2f(-0.70f, 0.35f);  // Kanan atas
+    glVertex2f(-0.70f, 0.30f);  // Kanan bawah
+    glVertex2f(-0.75f, 0.30f); // Kiri bawah
+//4,1
+	glBegin(GL_QUADS);
+	glColor3f(1.0f, 1.0f, 0.0f);  
+    glVertex2f(-0.75f, 0.25f); // Kiri atas
+    glVertex2f(-0.70f, 0.25f);  // Kanan atas
+    glVertex2f(-0.70f, 0.20f);  // Kanan bawah
+    glVertex2f(-0.75f, 0.20f); // Kiri bawah	
+//4,2
+	glBegin(GL_QUADS);
+	glColor3f(1.0f, 1.0f, 0.0f);  
+    glVertex2f(-0.65f, 0.25f); // Kiri atas
+    glVertex2f(-0.60f, 0.25f);  // Kanan atas
+    glVertex2f(-0.60f, 0.20f);  // Kanan bawah
+    glVertex2f(-0.65f, 0.20f); // Kiri bawah		
+	glEnd();
+    glFlush();
+}
+
 void drawGradientBackground() {
     glBegin(GL_QUADS);
     // Warna langit keemasan di bagian atas
@@ -27,7 +96,21 @@ void Marka() {
 }
 
 void Tanah() {
-    // Menggambar jalan (bagian hitam)
+	//ini rumah paling kanan
+	glPushMatrix();
+    glTranslatef(1.5f, -0.40f, 0.0f);
+    gedung();
+    glPopMatrix();
+    glFlush();
+    
+    	glBegin(GL_QUADS);
+	glColor3f(0.1f, 0.1f, 0.1f);  
+    glVertex2f(0.7f, 0.3f); // Kiri atas
+    glVertex2f(0.95f, 0.3f);  // Kanan atas
+    glVertex2f(0.99f, 0.2f);  // Kanan bawah
+    glVertex2f(0.665f, 0.2f); // Kiri bawah
+    
+	// Menggambar jalan (bagian hitam)
     glBegin(GL_QUADS);
     // Warna abu-abu di bagian atas jalan
     glColor3f(0.0f, 0.0f, 0.0f);  // Hitam
@@ -48,7 +131,33 @@ void Tanah() {
         glPopMatrix(); // Akhir stack
     }
     
-    glFlush();
+    gedung();
+    glPushMatrix();
+    glTranslatef(0.3f, -0.10f, 0.0f);
+    gedung();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0.6f, 0.0f, 0.0f);
+    gedung();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0.9f, -0.04f, 0.0f);
+    gedung();
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(-0.3f, -0.2f, 0.0f);
+    gedung();
+    glPopMatrix();
+
+	glPushMatrix();
+    glTranslatef(1.2f, -0.10f, 0.0f);
+    gedung();
+    glPopMatrix();
+    
+
 }
 
 void lampu() {
@@ -190,6 +299,7 @@ void Badan(void) {
     glPopMatrix();
     
     glutSwapBuffers();
+    
 }
 
 int main(int argc, char* argv[]) {
