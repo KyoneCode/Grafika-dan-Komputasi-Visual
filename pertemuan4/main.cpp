@@ -13,6 +13,66 @@ float lx=0.0f,ly=0.0f,lz=-1.0f;
 float deltaMove = 0.0f;
 int h, w;
 int bitmapHeight=12;
+
+// Fungsi untuk menggambar kubus dari 6 persegi (quads)
+void drawCube(float size) {
+    size = size / 2.0f;  // Setengah dari ukuran, sehingga ukuran total sesuai parameter
+    
+    // Sisi depan (front) - Z positif
+    glBegin(GL_QUADS);
+        glNormal3f(0.0f, 0.0f, 1.0f);  // Normal menghadap ke depan
+        glVertex3f(-size, -size, size);  // kiri bawah
+        glVertex3f(size, -size, size);   // kanan bawah
+        glVertex3f(size, size, size);    // kanan atas
+        glVertex3f(-size, size, size);   // kiri atas
+    glEnd();
+    
+    // Sisi belakang (back) - Z negatif
+    glBegin(GL_QUADS);
+        glNormal3f(0.0f, 0.0f, -1.0f);  // Normal menghadap ke belakang
+        glVertex3f(size, -size, -size);  // kanan bawah
+        glVertex3f(-size, -size, -size); // kiri bawah
+        glVertex3f(-size, size, -size);  // kiri atas
+        glVertex3f(size, size, -size);   // kanan atas
+    glEnd();
+    
+    // Sisi atas (top) - Y positif
+    glBegin(GL_QUADS);
+        glNormal3f(0.0f, 1.0f, 0.0f);  // Normal menghadap ke atas
+        glVertex3f(-size, size, -size);  // kiri belakang
+        glVertex3f(size, size, -size);   // kanan belakang
+        glVertex3f(size, size, size);    // kanan depan
+        glVertex3f(-size, size, size);   // kiri depan
+    glEnd();
+    
+    // Sisi bawah (bottom) - Y negatif
+    glBegin(GL_QUADS);
+        glNormal3f(0.0f, -1.0f, 0.0f);  // Normal menghadap ke bawah
+        glVertex3f(-size, -size, -size); // kiri belakang
+        glVertex3f(size, -size, -size);  // kanan belakang
+        glVertex3f(size, -size, size);   // kanan depan
+        glVertex3f(-size, -size, size);  // kiri depan
+    glEnd();
+    
+    // Sisi kanan (right) - X positif
+    glBegin(GL_QUADS);
+        glNormal3f(1.0f, 0.0f, 0.0f);  // Normal menghadap ke kanan
+        glVertex3f(size, -size, size);   // depan bawah
+        glVertex3f(size, -size, -size);  // belakang bawah
+        glVertex3f(size, size, -size);   // belakang atas
+        glVertex3f(size, size, size);    // depan atas
+    glEnd();
+    
+    // Sisi kiri (left) - X negatif
+    glBegin(GL_QUADS);
+        glNormal3f(-1.0f, 0.0f, 0.0f);  // Normal menghadap ke kiri
+        glVertex3f(-size, -size, -size); // belakang bawah
+        glVertex3f(-size, -size, size);  // depan bawah
+        glVertex3f(-size, size, size);   // depan atas
+        glVertex3f(-size, size, -size);  // belakang atas
+    glEnd();
+}
+
 void Reshape(int w1, int h1)
 {
 // Fungsi reshape
@@ -121,7 +181,7 @@ void lampu3D() {
     glPushMatrix();
     glTranslatef(0.8f, -0.075f, 0.2f);
     glScalef(0.2f, 0.03f, 0.05f);
-    glutSolidCube(1.0f);
+    drawCube(1.0f);
     glPopMatrix();
     
     // Lampu kiri (oranye gelap)
@@ -129,7 +189,7 @@ void lampu3D() {
     glPushMatrix();
     glTranslatef(-0.8f, -0.075f, 0.2f);
     glScalef(0.2f, 0.03f, 0.05f);
-    glutSolidCube(1.0f);
+    drawCube(1.0f);
     glPopMatrix();
 }
 
@@ -139,7 +199,7 @@ void Mobil3D() {
     glPushMatrix();
     glTranslatef(0.0f, -0.1f, 0.0f);
     glScalef(2.2f, 0.15f, 0.5f); // Lebih panjang dan sedikit lebih lebar
-    glutSolidCube(1.0f);
+    drawCube(1.0f);
     glPopMatrix();
     
     // Bagian atas mobil (atap) - bentuk trapesium (warna abu-abu)
@@ -258,7 +318,7 @@ void Mobil3D() {
    // Roda depan kanan
 		glPushMatrix();
 		    glTranslatef(-0.7f, -0.175f, 0.2495f);  // Pindah ke posisi roda
-		    glRotatef(90, 0, 1, 0);               // Rotasi 90° di sumbu Y
+		    glRotatef(90, 0, 1, 0);               // Rotasi 90Â° di sumbu Y
 		    drawWheel3D(0, 0, 0, 0.12f, 0.05f);   // Gambar roda di pusat koordinat lokal
 		glPopMatrix();
 		
@@ -287,13 +347,13 @@ void Mobil3D() {
 	    glPushMatrix();
 	    glTranslatef(-1.030f, -0.1f, 0.21f);
 	    glScalef(0.15f, 0.05f, 0.1f);
-	    glutSolidCube(1.0f);
+	    drawCube(1.0f);
 	    glPopMatrix();
 	    
 	    glPushMatrix();
 	    glTranslatef(-1.030f, -0.1f, -0.21f);
 	    glScalef(0.15f, 0.05f, 0.1f);
-	    glutSolidCube(1.0f);
+	    drawCube(1.0f);
 	    glPopMatrix();
     
     // Lampu belakang (merah, seperti di gambar)
@@ -301,13 +361,13 @@ void Mobil3D() {
 	    glPushMatrix();
 	    glTranslatef(1.030f, -0.1f, 0.21f);
 	    glScalef(0.15f, 0.05f, 0.1f);
-	    glutSolidCube(1.0f);
+	    drawCube(1.0f);
 	    glPopMatrix();
 	    
 	    glPushMatrix();
 	    glTranslatef(1.030f, -0.1f, -0.21f);
 	    glScalef(0.15f, 0.05f, 0.1f);
-	    glutSolidCube(1.0f);
+	    drawCube(1.0f);
 	    glPopMatrix();
 }
 void Grass() {
